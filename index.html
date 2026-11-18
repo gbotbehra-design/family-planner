@@ -179,6 +179,32 @@ textarea::placeholder{color:var(--fg3)}
  #modal button{min-height:50px;font-size:17px;padding:0 16px}
  #sy{right:max(10px,env(safe-area-inset-right));bottom:calc(8px + env(safe-area-inset-bottom));font-size:11px;font-weight:500;color:var(--fg2);background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
 }
+/* ---- art v2: stronger seasonal art (styling only) ---- */
+:root{--wash:rgba(255,255,255,.3);--card:rgba(255,255,255,.5);--card-b:rgba(255,255,255,.65)}
+#deco svg{opacity:.85;scale:1.35}
+#dayv .row{background:rgba(255,255,255,.88)}
+#dayv .it.b:not(.row),#dayv .it:not(.b){background:rgba(255,255,255,.78)}
+td:not(:empty){background:rgba(255,255,255,.5)}
+@media (hover:hover){td:not(:empty):hover{background:rgba(255,255,255,.85)}}
+.pv{background:#fff;background:color-mix(in srgb,var(--ac) 14%,#fff)}
+#rem{background:rgba(255,255,255,.72)}
+.nav button{background:rgba(255,255,255,.9);box-shadow:0 1px 3px rgba(0,0,0,.08)}.nav .tb{background:#e4efff}
+#modal textarea{background:rgba(118,118,128,.1)}
+#wx,.nav h2,#clock,#date,.card h2{text-shadow:0 0 6px rgba(255,255,255,.95),0 0 2px rgba(255,255,255,.9)}
+@media (max-width:820px){
+ #frame,.blob{display:block!important}
+ .blob{opacity:.35;transform:scale(.6)}
+ #deco svg{scale:1.6;opacity:.85}
+ /* corner pieces, scaled for phone */
+ #frame svg[style^="left:0;top:0"]{transform:scale(.5);transform-origin:0 0}
+ #frame svg[style^="right:0;top:0"]{transform:scale(.5);transform-origin:100% 0}
+ /* full-width top garlands */
+ #frame svg[width="1920"][style^="left:0;top:0"]{transform:scale(.5);transform-origin:0 0}
+ /* bottom scenery: fit the left part of the scene across the phone */
+ #frame svg[viewBox="0 0 1920 300"]{width:940px;height:147px;bottom:0!important;left:0!important}
+ .grid{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+ .card{-webkit-backdrop-filter:none;backdrop-filter:none}
+}
 /* ---- dark mode ---- */
 @media (prefers-color-scheme:dark){
  :root{--pri:#3d8bff;--pri-t:rgba(61,139,255,.18);--red:#ff453a;--red-t:rgba(255,69,58,.16);--fg:#f2f2f7;--fg2:#aeaeb2;--fg3:#8e8e93;--line:rgba(255,255,255,.1);--card:rgba(28,28,30,.86);--card-b:rgba(255,255,255,.06);--fill:rgba(118,118,128,.24);--sheet:#1c1c1e;--wash:rgba(0,0,0,.8)}
@@ -281,7 +307,7 @@ function theme(m){if(m===lastTh)return;lastTh=m;const t=TH[m];
 document.body.style.background="linear-gradient(120deg,"+t.bg.join(",")+")";document.body.style.backgroundSize="400% 400%";
 document.documentElement.style.setProperty("--ac",t.ac);
 document.querySelectorAll(".blob").forEach((b,i)=>b.style.background=t.bl[i%4]);
-let h="";for(let i=0;i<8;i++){const[k,c]=t.sh[i%t.sh.length],sz=24+Math.random()*30;
+let h="";for(let i=0;i<12;i++){const[k,c]=t.sh[i%t.sh.length],sz=24+Math.random()*30;
 h+=`<svg viewBox="0 0 40 40" width="${sz}" height="${sz}" style="left:${Math.random()*100}%;animation-duration:${30+Math.random()*20}s;animation-delay:${-Math.random()*30}s">${SH[k](c)}</svg>`}
 deco.innerHTML=h;frame.innerHTML=FR[m]||""}
 let vy=new Date().getFullYear(),vm=new Date().getMonth();
