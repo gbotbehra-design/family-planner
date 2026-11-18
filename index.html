@@ -205,14 +205,40 @@ td:not(:empty){background:rgba(255,255,255,.5)}
  .grid{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
  .card{-webkit-backdrop-filter:none;backdrop-filter:none}
 }
+/* ---- holidays (styling only; icons set by display-only script) ---- */
+td.hol{background:color-mix(in srgb,var(--ac) 15%,rgba(255,255,255,.88))!important;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ac) 55%,transparent)}
+td.hol::after{content:attr(data-ico);position:absolute;top:4px;right:5px;font-size:17px;line-height:1;pointer-events:none}
+#cal .hl{display:block;background:var(--ac);color:#fff;border-radius:999px;padding:2px 7px;margin:0 auto 3px;font-weight:700;text-shadow:none}
+#dayv .it.b.holi:not(.row){background:color-mix(in srgb,var(--ac) 16%,#fff)!important;color:var(--ac);border:1.5px solid color-mix(in srgb,var(--ac) 45%,transparent);font-size:17px}
+#dayv .it.b.holi::before{content:attr(data-ico);width:auto;height:auto;flex:0 0 auto;background:none;border-radius:0;font-size:22px;line-height:1}
+@media (max-width:820px){
+ td.hol::after{top:2px;right:2px;font-size:12px}
+ #cal .hl{font-size:8px;padding:1px 3px;border-radius:4px;margin-bottom:2px}
+}
 /* ---- dark mode ---- */
 @media (prefers-color-scheme:dark){
- :root{--pri:#3d8bff;--pri-t:rgba(61,139,255,.18);--red:#ff453a;--red-t:rgba(255,69,58,.16);--fg:#f2f2f7;--fg2:#aeaeb2;--fg3:#8e8e93;--line:rgba(255,255,255,.1);--card:rgba(28,28,30,.86);--card-b:rgba(255,255,255,.06);--fill:rgba(118,118,128,.24);--sheet:#1c1c1e;--wash:rgba(0,0,0,.8)}
- html,body{background:#000!important}
- #dayv .row{background:rgba(44,44,46,.7)}
- .pv,.hl,#dayv .it.b:not(.row){filter:brightness(1.6) saturate(.9)}
- .pv{color:var(--fg)}
- #date[style*="color"]{filter:brightness(1.5)}
+ :root{--pri:#3d8bff;--pri-t:rgba(61,139,255,.2);--red:#ff453a;--red-t:rgba(255,69,58,.18);--fg:#f2f2f7;--fg2:#aeaeb2;--fg3:#8e8e93;--line:rgba(255,255,255,.1);--card:rgba(28,28,32,.62);--card-b:rgba(255,255,255,.08);--fill:rgba(118,118,128,.26);--sheet:#1c1c1e;--wash:transparent;--acl:color-mix(in srgb,var(--ac) 45%,#fff)}
+ html,body{background:#0c0c11!important}
+ body::before{display:none}
+ #deco svg{opacity:.7}
+ #wx,.nav h2,#clock,#date,.card h2{text-shadow:0 1px 3px rgba(0,0,0,.55)}
+ #date[style*="color"]{color:#b9b0ff!important;filter:none}
+ .nav select{color:var(--acl)}
+ .nav button{background:rgba(58,58,64,.9);color:var(--fg);box-shadow:none}.nav .tb{background:rgba(61,139,255,.24);color:#7cb2ff}
+ td:not(:empty){background:rgba(44,44,50,.58)}
+ @media (hover:hover){td:not(:empty):hover{background:rgba(72,72,80,.75)}}
+ .pv{background:color-mix(in srgb,var(--ac) 32%,#1d1d23);color:#f2f2f7;border-left-color:var(--acl);filter:none}
+ .hl{color:var(--acl);filter:none}
+ #dayv .row{background:rgba(38,38,44,.9)}
+ #dayv .it.b:not(.row),#dayv .it:not(.b){background:rgba(38,38,44,.85);filter:none}
+ #dayv .it.b:not(.row){color:var(--acl)}
+ #dayv .it.b::before{background:var(--acl)}
+ #dayv .row{border-left-color:var(--acl)}
+ #rem{background:rgba(38,38,44,.82)}
+ #modal textarea{background:rgba(118,118,128,.24)}
+ td.hol{background:color-mix(in srgb,var(--ac) 30%,rgba(30,30,36,.92))!important;box-shadow:inset 0 0 0 1.5px var(--acl)}
+ #cal .hl{background:color-mix(in srgb,var(--ac) 70%,#fff);color:#111}
+ #dayv .it.b.holi:not(.row){background:color-mix(in srgb,var(--ac) 34%,#1d1d23)!important;color:#fff;border-color:var(--acl)}
 }
 </style></head><body><div id="deco"></div><div id="frame"></div>
 <div class="blob" style="width:380px;height:380px;background:#ffc8dd;top:5%;left:10%"></div>
@@ -351,5 +377,5 @@ const MAP={"💰 Shawna payday (Sendaro)": "Shawna payday", "⏱ Shawna timecard
 
 document.addEventListener("click",e=>{if(innerWidth<=820&&e.target.closest("#cal td"))setTimeout(()=>dayv.scrollIntoView({behavior:"smooth",block:"center"}),80)});SREADY=true;sync();setInterval(sync,60000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
 tick();cal();wx();setInterval(tick,1000);setInterval(cal,60000);setInterval(wx,900000);
-</script><script>(function(){var mn=document.getElementById("mn");["touchend","click"].forEach(function(ev){mn.addEventListener(ev,function(){if(document.activeElement!==mn){mn.readOnly=false;mn.disabled=false;mn.focus()}})})})()</script></body></html>
+</script><script>(function(){var mn=document.getElementById("mn");["touchend","click"].forEach(function(ev){mn.addEventListener(ev,function(){if(document.activeElement!==mn){mn.readOnly=false;mn.disabled=false;mn.focus()}})})})()</script><script>(function(){var I=[[/Thanksgiving/,"🦃"],[/Christmas Eve/,"🌟"],[/Christmas/,"🎄"],[/New Year's Eve/,"🥂"],[/New Year/,"🎉"],[/Halloween/,"🎃"],[/Valentine/,"❤️"],[/Patrick/,"☘️"],[/Easter/,"🐣"],[/Mother/,"💐"],[/Father/,"👔"],[/Memorial/,"🇺🇸"],[/July 4/,"🎆"],[/Labor/,"🛠️"],[/Presidents/,"🇺🇸"],[/MLK/,"🕊️"],[/Summer/,"☀️"],[/school/i,"🎒"]];function ic(t){for(var i=0;i<I.length;i++)if(I[i][0].test(t))return I[i][1];return"🎉"}function dec(){try{document.querySelectorAll("#cal .hl").forEach(function(h){var td=h.closest("td");if(!td)return;var e=ic(h.textContent);td.setAttribute("data-ico",e);td.classList.add("hol")});document.querySelectorAll("#dayv .it.b:not(.row)").forEach(function(d){d.setAttribute("data-ico",ic(d.textContent));d.classList.add("holi")})}catch(x){}}var mo=new MutationObserver(dec);["cal","dayv"].forEach(function(id){var el=document.getElementById(id);if(el)mo.observe(el,{childList:true})});dec()})()</script></body></html>
 <script>setTimeout(()=>{const n=new Date();showDay(n.getFullYear(),n.getMonth(),n.getDate())},300)</script>
